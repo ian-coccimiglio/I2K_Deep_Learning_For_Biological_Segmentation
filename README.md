@@ -1,2 +1,12 @@
-# I2K_Deep_Learning_For_Biological_Segmentation
+# I2K\_Deep\_Learning\_For\_Biological\_Segmentation
 Developing a Workflow for Biological Instance Segmentation
+
+## Semi-supervised learning
+- Instance segmentation, in general, can be 
+
+# Workshop Details:
+- Today we'll be using a sample case.
+- You'll annotate a small portion
+
+# Catastrophic Forgetting
+# 
