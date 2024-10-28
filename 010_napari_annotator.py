@@ -87,10 +87,12 @@ def annotate_patch(patch_path, patch_label_path, save_path=None):
 
 
 if __name__ == "__main__":
-    patch_dir = "patch/"
-    patch_label_dir = "patch_label/"
+    mode = "train"
     sample = "normPSR"  # CHANGE THIS
-    annotate = True  # CHANGE THIS
+    annotate = False  # CHANGE THIS
+
+    patch_dir = f"patch_{mode}/"
+    patch_label_dir = f"label_{mode}/"
 
     squares = []
     for patch_name in os.listdir(patch_dir):

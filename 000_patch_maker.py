@@ -42,8 +42,8 @@ def save_patch(sample_name, patch_dir, idx_string):
 
 if __name__ == "__main__":
     raw_dir = "raw_images/"
-    patch_dir = "patch/"
-    n = 1
+    patch_dir = "test_patch/"
+    n = 2
     patch_size = 512
     for im_name in os.listdir(raw_dir):
         im_path = os.path.join(raw_dir, im_name)
