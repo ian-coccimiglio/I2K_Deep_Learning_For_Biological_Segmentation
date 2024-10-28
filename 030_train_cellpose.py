@@ -38,6 +38,7 @@ for label_name in os.listdir(label_dir):
 model = models.CellposeModel(gpu=True, model_type="cyto3")
 
 n = 800
+os.makedirs("models", exist_ok=True)
 model_path = train.train_seg(
     model.net,
     train_data=patches,

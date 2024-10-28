@@ -89,7 +89,7 @@ def annotate_patch(patch_path, patch_label_path, save_path=None):
 if __name__ == "__main__":
     patch_dir = "patch/"
     patch_label_dir = "patch_label/"
-    sample = "noisyPSR"  # CHANGE THIS
+    sample = "normPSR"  # CHANGE THIS
     annotate = True  # CHANGE THIS
 
     squares = []

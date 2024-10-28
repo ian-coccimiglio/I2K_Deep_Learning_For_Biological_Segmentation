@@ -23,31 +23,36 @@ def napari_multiview(im, label):
     napari.run()
 
 
-def run_cellpose_model(useGPU=True, model=None):
-    if (model is not None) and (model != "cyto3"):
+def run_cellpose_model(
+    useGPU=True, model_name=None, custom_model_dir="models"
+):
+    if (model_name is not None) and (model_name != "cyto3"):
+        model_path = os.path.join(custom_model_dir, model_name)
         model = models.CellposeModel(
             gpu=useGPU,
             pretrained_model=model_path,
         )
-        masks, flow, style = model.eval(im, diameter=None, channels=[0, 0])
     else:
-        model = models.Cellpose(gpu=useGPU, model_type="cyto3")
-        masks, flow, style, diam = model.eval(
-            im, diameter=None, channels=[0, 0]
-        )
-        print(f"estimated diameter: {np.round(diam,1)}")
+        model = models.CellposeModel(gpu=useGPU, model_type="cyto3")
+
+    masks, flow, style = model.eval(
+        im,
+        diameter=None,
+        channels=[0, 0],
+        cellprob_threshold=0.0,
+        flow_threshold=0.4,
+    )
 
     return masks
 
 
 # warnings.filterwarnings("ignore")
-
-base_model_name = "cyto3"
 custom_model_dir = "models"
-model_name = "psr_400epochs_3patches"
+model_name = "psr_800epochs_6patches"
+image_dir = "raw_images"
+
 
 n = 0
-image_dir = "raw_images"
 image_names = sorted(os.listdir(image_dir))
 image_paths = [
     os.path.join(image_dir, image_name) for image_name in image_names
@@ -62,7 +67,11 @@ if __name__ == "__main__":
     for enum, image_path in enumerate(image_paths):
         print(f"Running {model_name} model on: {image_path}")
         im = io.imread(image_path)
-        masks = run_cellpose_model(useGPU=useGPU, model=model_path)
+        masks = run_cellpose_model(
+            useGPU=useGPU,
+            model_name=model_name,
+            custom_model_dir=custom_model_dir,
+        )
 
         if view_napari:
             napari_multiview(im, masks)
